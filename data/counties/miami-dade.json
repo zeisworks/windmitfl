@@ -8,11 +8,15 @@
   "ami_80": "NEEDS_VERIFICATION: HUD FY2026 80% AMI for Miami-Dade",
   "ami_120": "NEEDS_VERIFICATION: 120% of HUD FY2026 median family income for Miami-Dade",
   "windstorm_context": {
-    "avg_annual_premium_usd": "NEEDS_VERIFICATION: OIR rate data / QUASR county averages",
-    "premium_source": "Florida Office of Insurance Regulation",
-    "citizens_share_note": "NEEDS_VERIFICATION: Citizens policy count for Miami-Dade from Citizens exposure reports",
+    "avg_annual_premium_usd": 6023,
+    "premium_source": "Florida Office of Insurance Regulation, Property Insurance Stability Report, January 1, 2026 (average homeowners premium including wind coverage, Market Intelligence Report data as of September 30, 2025)",
+    "premium_source_url": "https://floir.gov/docs-sf/default-source/property-and-casualty/stability-unit-reports/january-2026-isu-report-final.pdf",
+    "premium_excl_wind_usd": 3585,
+    "citizens_share_note": "Citizens Property Insurance, the state-backed insurer of last resort, held 70,173 personal residential policies in Miami-Dade as of April 30, 2026, roughly one in four of its 289,824 personal residential policies statewide.",
+    "citizens_source_url": "https://www.citizensfla.com/policies-in-force",
+    "citizens_as_of": "2026-04-30",
     "risk_designation": "High-Velocity Hurricane Zone",
-    "_premium_editor_note": "Do not publish a figure without OIR sourcing."
+    "_premium_editor_note": "Re-verify when OIR publishes the July 2026 Stability Report. Citizens counts are dropping fast month over month; re-verify monthly."
   },
   "wind_borne_debris_region": "Miami-Dade is within the High-Velocity Hurricane Zone (HVHZ) under the Florida Building Code; product approvals for opening protection are stricter than in the rest of the state.",
   "faq": [
