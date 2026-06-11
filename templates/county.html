@@ -44,7 +44,7 @@
       <p class="data-label">MSFH INCOME LIMITS</p>
       {% if county.ami_80 | fact and county.ami_120 | fact %}
       <p class="data-figure">{{ county.ami_80 | usd }} / {{ county.ami_120 | usd }}</p>
-      <p class="data-note">Low (80% AMI) / moderate (120% AMI) household income ceilings</p>
+      <p class="data-note">Low (80% AMI) / moderate (120% AMI) ceilings, 4-person household; limits vary by household size</p>
       {% else %}
       <p class="data-figure data-pending">Pending</p>
       <p class="data-note">Awaiting HUD income limit verification</p>
