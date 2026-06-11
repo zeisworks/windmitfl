@@ -86,6 +86,21 @@ def breadcrumb_jsonld(crumbs):
     )
 
 
+def article_jsonld(guide, url, last_verified):
+    return json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": guide["title"],
+            "description": guide["description"],
+            "url": BASE_URL + url,
+            "dateModified": last_verified,
+            "author": {"@type": "Organization", "name": SITE_NAME, "url": BASE_URL},
+            "publisher": {"@type": "Organization", "name": SITE_NAME, "url": BASE_URL},
+        }
+    )
+
+
 def faq_jsonld(faq):
     return json.dumps(
         {
@@ -124,7 +139,7 @@ class Site:
             statewide=self.statewide,
         )
 
-    def render(self, template, url, *, crumbs, noindex=False, **ctx):
+    def render(self, template, url, *, crumbs, noindex=False, lastmod=None, **ctx):
         """Render template to output/<url>/index.html (or literal file path)."""
         page = {
             "url": url,
@@ -141,7 +156,7 @@ class Site:
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(html)
         if not noindex:
-            self.sitemap_urls.append(url)
+            self.sitemap_urls.append((url, lastmod or self.statewide["last_verified"]))
 
     def build(self):
         if OUT.exists():
@@ -173,6 +188,7 @@ class Site:
                 url,
                 crumbs=[("Home", "/"), (c["name"], url)],
                 noindex=c["_unverified"],
+                lastmod=c["last_verified"],
                 county=c,
                 faq_jsonld=faq_jsonld(c["faq"]),
             )
@@ -191,6 +207,7 @@ class Site:
                 url,
                 crumbs=[("Home", "/"), ("Guides", "/guides/"), (g["title"], url)],
                 guide=g,
+                article_jsonld=article_jsonld(g, url, self.statewide["last_verified"]),
             )
 
         # Tools
@@ -217,6 +234,14 @@ class Site:
                 noindex=True,
             )
 
+        # 404 (literal file for static hosts; never indexed or in the sitemap)
+        self.render(
+            "404.html",
+            "/404.html",
+            crumbs=[("Home", "/")],
+            noindex=True,
+        )
+
         self.write_sitemap()
         self.write_robots()
 
@@ -233,7 +258,8 @@ class Site:
 
     def write_sitemap(self):
         rows = "\n".join(
-            f"  <url><loc>{BASE_URL}{u}</loc></url>" for u in self.sitemap_urls
+            f"  <url><loc>{BASE_URL}{u}</loc><lastmod>{lastmod}</lastmod></url>"
+            for u, lastmod in self.sitemap_urls
         )
         (OUT / "sitemap.xml").write_text(
             '<?xml version="1.0" encoding="UTF-8"?>\n'

@@ -36,7 +36,7 @@
       <label><input type="radio" name="coverage" value="unsure"> Not sure</label>
     </fieldset>
     <fieldset>
-      <legend>5. How does your household income compare with your county's median income? County dollar thresholds are published on each county page as they are verified; HUD income limits are the underlying source.</legend>
+      <legend>5. How does your household income compare with your county's median income? Verified dollar thresholds are published on each <a href="/#counties">county page</a>; HUD income limits are the underlying source.</legend>
       <label><input type="radio" name="income" value="low" required> At or below 80% of the county median</label>
       <label><input type="radio" name="income" value="moderate"> Above 80%, up to 120% of the county median</label>
       <label><input type="radio" name="income" value="high"> Above 120% of the county median</label>
@@ -53,7 +53,7 @@
   <div id="elig-result" class="tool-result" role="status" aria-live="polite" hidden>
     <p class="eyebrow">RESULT</p>
     <div id="elig-result-body"></div>
-    <p class="cite">Screening only. Eligibility, priority, and funding are determined by the Florida Department of Financial Services. {{ el.application_window_rule }} Apply at <a href="{{ statewide.msfh.portal }}" rel="noopener">mysafeflhome.com</a>.</p>
+    <p class="cite">Screening only. Eligibility, priority, and funding are determined by the Florida Department of Financial Services. {{ el.application_window_rule }} One timing rule to know: the inspection backing a grant application must be no more than 24 months old. Apply at <a href="{{ statewide.msfh.portal }}" rel="noopener">mysafeflhome.com</a>.</p>
   </div>
 
   {% include "partials/disclaimer.html" %}

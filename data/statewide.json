@@ -1,5 +1,13 @@
 {
   "_comment": "Shared facts rendered across all pages. Every fact has a source. Flagged fields must be confirmed before publish. last_verified is rendered on-page.",
+  "_reviews": [
+    {"path": "msfh.fy2026_27", "review_by": "2026-07-01", "reason": "HB 5001E awaiting Governor's signature; confirm signature and surviving line items, then update status and changelog."},
+    {"path": "msfh.tax_package", "review_by": "2026-07-01", "reason": "HB 7031E awaiting Governor's signature; confirm enactment before the refund window opens 2026-07-01."},
+    {"path": "msfh.eligibility", "review_by": "2026-07-01", "reason": "s. 215.5586(2)(a)7 (income-limited cycle, 24-month inspection recency, suspended low-income cap exemption) sunsets 2026-07-01 unless amended; re-verify the statute and program terms, then update eligibility copy and the checker."},
+    {"path": "counties.*.windstorm_context.avg_annual_premium_usd", "review_by": "2026-07-31", "reason": "OIR publishes the July 2026 Property Insurance Stability Report with fresh county average premiums."},
+    {"path": "counties.*.windstorm_context.citizens_share_note", "review_by": "2026-07-15", "reason": "Citizens posts monthly policies-in-force counts; counts are dropping fast (392,689 in Jan 2026 to 294,894 in Apr 2026)."},
+    {"path": "counties.*.ami_80", "review_by": "2027-05-01", "reason": "HUD FY2027 income limits expected spring 2027; FHFC chart follows."}
+  ],
   "last_verified": "2026-06-11",
 
   "form": {
@@ -79,6 +87,7 @@
       "insured_value_note": "Insurance Coverage A at or below $700,000 for ALL applicants this cycle, including low-income. The statutory low-income exemption from the cap (s. 215.5586(2)(a)2.) is suspended by s. 215.5586(2)(a)7.c., which expires 2026-07-01; mysafeflhome.com program materials list the cap with no waiver. Re-verify after 2026-07-01, when subparagraph 7 (including the low/moderate income restriction) sunsets unless amended.",
       "insurance_required": "Must carry a valid homeowners insurance policy",
       "inspection_first": "A program wind mitigation inspection must be completed before a grant is issued; only improvements recommended in the inspection report are eligible",
+      "inspection_recency": "The hurricane mitigation inspection must have occurred within the previous 24 months from the date of application (s. 215.5586(2)(a)7.b., Florida Statutes; subparagraph 7 expires 2026-07-01)",
       "income_limit_this_cycle": "2025-26 cycle limited to low- and moderate-income homeowners. Higher-income homeowners are not eligible this cycle (a change from earlier years).",
       "income_tiers": {
         "low": "Household income at or below 80% of county median income",
