@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% set msfh = statewide.msfh %}
+
+{% block title %}Florida Wind Mitigation: the 2026 Form, Insurance Discounts, and MSFH Grants | {{ site_name }}{% endblock %}
+{% block description %}Independent guide to Florida's wind mitigation system: the OIR-B1-1802 form revised April 2026, windstorm premium discounts required by law, and My Safe Florida Home grants, county by county.{% endblock %}
+
+{% block advisory %}
+<div class="advisory-bar">
+  <div class="wrap">
+    <p class="advisory-eyebrow">STATEWIDE ADVISORY / FLORIDA / UPDATED {{ statewide.last_verified }}</p>
+    <h1 class="advisory-name">Florida's wind mitigation money, explained</h1>
+    <p class="advisory-risk">The 2026 inspection form, the insurance discounts, and the My Safe Florida Home grant, without a sales pitch</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <section class="data-strip" aria-label="Key statewide figures">
+    <div class="data-cell">
+      <p class="data-label">NEW FORM EFFECTIVE</p>
+      <p class="data-figure">Apr 1, 2026</p>
+      <p class="data-note">{{ statewide.form.id }} {{ statewide.form.revision }}, first major update in {{ statewide.form.first_major_revision_in }}</p>
+    </div>
+    <div class="data-cell">
+      <p class="data-label">WINDSTORM SHARE OF PREMIUM</p>
+      <p class="data-figure">{{ statewide.inspection.windstorm_share_of_premium_pct[0] }}&ndash;{{ statewide.inspection.windstorm_share_of_premium_pct[1] }}%</p>
+      <p class="data-note">The portion of a Florida premium that mitigation discounts apply to</p>
+    </div>
+    <div class="data-cell">
+      <p class="data-label">MSFH GRANT CAP</p>
+      <p class="data-figure">{{ msfh.grant_terms.max_grant_usd | usd }}</p>
+      <p class="data-note">2:1 state match; reimbursement after completed, inspected work</p>
+    </div>
+    <div class="data-cell">
+      <p class="data-label">INSPECTION COST</p>
+      <p class="data-figure">{{ statewide.inspection.cost_range_usd[0] | usd }}&ndash;{{ statewide.inspection.cost_range_usd[1] | usd }}</p>
+      <p class="data-note">Typical cost; the report is valid up to {{ statewide.form.validity_years }} years</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 01 / HOW THE SYSTEM WORKS</p>
+    <h2>Three moving parts, one paper trail</h2>
+    <p>Florida law requires residential insurers to discount the windstorm portion of your premium when your home has documented wind-resistant features. The document that proves those features is a wind mitigation inspection report on form {{ statewide.form.id }}. And for low- and moderate-income homeowners, the My Safe Florida Home program pays for the inspection and matches money spent on the upgrades the inspection recommends.</p>
+    <p>That is the whole system: an inspection that documents features, discounts the law requires carriers to apply, and a grant program that helps pay for hardening. Every page on this site is one of those three parts, broken down by county, with a "last verified" date and primary sources.</p>
+    <p>This site is independent. It is not run by an inspector, a contractor, or an insurer, and it does not tell you what to buy. It shows the numbers and links the primary sources: the <a href="{{ statewide.form.sources[0] }}" rel="noopener">Office of Insurance Regulation</a>, the <a href="{{ msfh.portal }}" rel="noopener">My Safe Florida Home portal</a>, and the Florida Statutes.</p>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 02 / PROGRAM STATUS</p>
+    <h2>My Safe Florida Home, right now</h2>
+    <p class="status-line"><span class="status-label">STATUS</span> {{ msfh.status }}</p>
+    {% for entry in msfh.changelog %}
+    <p class="status-line"><span class="status-label">{{ entry.date }}</span> {{ entry.entry }}</p>
+    {% endfor %}
+    <p><a class="btn-cone" href="/tools/msfh-eligibility/">Check your eligibility</a></p>
+  </section>
+
+  <section class="section" id="counties">
+    <p class="eyebrow">SEC. 03 / COUNTIES</p>
+    <h2>County pages</h2>
+    {% if counties %}
+    <ul class="county-list">
+      {% for c in counties %}
+      <li><a href="/county/{{ c.slug }}/">{{ c.name }}</a> <span class="county-region">{{ c.region }}</span></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>County pages publish one at a time, as each county's income limits and premium figures are verified against HUD and OIR data. None have cleared verification yet. The first wave covers Miami-Dade, Broward, Palm Beach, Hillsborough, Pinellas, Orange, Duval, Lee, Polk, Brevard, Volusia, Pasco, Sarasota, Collier, and Manatee.</p>
+    {% endif %}
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 04 / GUIDES</p>
+    <h2>The guides</h2>
+    <ol class="guide-list">
+      {% for g in guides %}
+      <li><a href="/guides/{{ g.slug }}/">{{ g.title }}</a></li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  {% include "partials/disclaimer.html" %}
+  {% include "partials/cta_insurance.html" %}
+
+  <p class="page-stamp">LAST VERIFIED {{ statewide.last_verified }} / SOURCES: FL OIR, FL DFS, FLORIDA STATUTES</p>
+</div>
+{% endblock %}

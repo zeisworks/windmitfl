@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ guide.title }} | {{ site_name }}{% endblock %}
+{% block description %}{{ guide.description }}{% endblock %}
+
+{% block content %}
+<div class="wrap">
+  <article class="guide">
+    <header class="page-head">
+      <p class="eyebrow">GUIDE {{ "%02d" | format(guide.number) }} / {{ guide.eyebrow }}</p>
+      <h1>{{ guide.title }}</h1>
+      <p class="page-stamp">LAST VERIFIED {{ statewide.last_verified }}</p>
+    </header>
+    <div class="prose">
+      {{ guide.body | safe }}
+    </div>
+    {% include "partials/disclaimer.html" %}
+    {% if guide.insurance_cta %}
+    {% include "partials/cta_insurance.html" %}
+    {% endif %}
+  </article>
+</div>
+{% endblock %}

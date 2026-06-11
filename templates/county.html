@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% set wc = county.windstorm_context %}
+{% set msfh = statewide.msfh %}
+
+{% block title %}{{ county.name }} Wind Mitigation: 2026 Form, Insurance Discounts, MSFH Grants | {{ site_name }}{% endblock %}
+{% block description %}How wind mitigation works in {{ county.name }}: the OIR-B1-1802 form revised April 2026, windstorm premium discounts, and My Safe Florida Home grant eligibility, verified against primary sources.{% endblock %}
+
+{% block head %}
+<script type="application/ld+json">{{ faq_jsonld | safe }}</script>
+{% endblock %}
+
+{% block advisory %}
+<div class="advisory-bar">
+  <div class="wrap">
+    <p class="advisory-eyebrow">COUNTY ADVISORY / {{ county.name | upper }} / UPDATED {{ county.last_verified }}</p>
+    <h1 class="advisory-name">{{ county.name }}</h1>
+    {% if wc.risk_designation | fact %}
+    <p class="advisory-risk">{{ wc.risk_designation }}</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="wrap">
+
+  <section class="data-strip" aria-label="Key figures">
+    <div class="data-cell">
+      <p class="data-label">AVG ANNUAL PREMIUM</p>
+      {% if wc.avg_annual_premium_usd | fact %}
+      <p class="data-figure">{{ wc.avg_annual_premium_usd | usd }}</p>
+      <p class="data-note">{{ wc.premium_source | fact }}</p>
+      {% else %}
+      <p class="data-figure data-pending">Pending</p>
+      <p class="data-note">Awaiting OIR verification</p>
+      {% endif %}
+    </div>
+    <div class="data-cell">
+      <p class="data-label">WINDSTORM SHARE OF PREMIUM</p>
+      <p class="data-figure">{{ statewide.inspection.windstorm_share_of_premium_pct[0] }}&ndash;{{ statewide.inspection.windstorm_share_of_premium_pct[1] }}%</p>
+      <p class="data-note">Typical Florida range; the part discounts apply to</p>
+    </div>
+    <div class="data-cell">
+      <p class="data-label">MSFH INCOME LIMITS</p>
+      {% if county.ami_80 | fact and county.ami_120 | fact %}
+      <p class="data-figure">{{ county.ami_80 | usd }} / {{ county.ami_120 | usd }}</p>
+      <p class="data-note">Low (80% AMI) / moderate (120% AMI) household income ceilings</p>
+      {% else %}
+      <p class="data-figure data-pending">Pending</p>
+      <p class="data-note">Awaiting HUD income limit verification</p>
+      {% endif %}
+    </div>
+    <div class="data-cell">
+      <p class="data-label">INSPECTION COST</p>
+      <p class="data-figure">{{ statewide.inspection.cost_range_usd[0] | usd }}&ndash;{{ statewide.inspection.cost_range_usd[1] | usd }}</p>
+      <p class="data-note">{{ statewide.inspection.cost_note }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 01 / THE 2026 FORM</p>
+    <h2>What changed under the 2026 wind mitigation form</h2>
+    <p>Every wind mitigation discount in {{ county.name }} runs through one document: the {{ statewide.form.name }} ({{ statewide.form.id }}). The form was revised effective {{ statewide.form.effective_date }} ({{ statewide.form.revision }}), its first major update in {{ statewide.form.first_major_revision_in }}, based on the {{ statewide.form.basis }}. Carriers are expected to begin applying credits based on the new form around July 2026.</p>
+    <ul class="rule-list">
+      {% for change in statewide.form.key_changes %}
+      <li>{{ change }}</li>
+      {% endfor %}
+    </ul>
+    {% if county.wind_borne_debris_region %}
+    <p>{{ county.wind_borne_debris_region }}</p>
+    {% endif %}
+    <p class="cite">Source: <a href="{{ statewide.form.sources[0] }}" rel="noopener">Florida Office of Insurance Regulation, wind mitigation resources</a>. A report is {{ statewide.form.validity_note | lower }}.</p>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 02 / MSFH ELIGIBILITY</p>
+    <h2>My Safe Florida Home eligibility in {{ county.name }}</h2>
+    <p class="status-line"><span class="status-label">PROGRAM STATUS</span> {{ msfh.status }}</p>
+    {% set latest = msfh.changelog[0] %}
+    <p class="status-line"><span class="status-label">LATEST UPDATE {{ latest.date }}</span> {{ latest.entry }}</p>
+    <p>The current cycle is limited to low- and moderate-income homeowners, measured against the {{ county.name }} area median income. {{ msfh.eligibility.income_limit_this_cycle }}</p>
+    <table class="data-table">
+      <caption>Income tiers for {{ county.name }}</caption>
+      <thead>
+        <tr><th scope="col">Tier</th><th scope="col">Definition</th><th scope="col">Household income ceiling</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Low income</th>
+          <td>{{ msfh.eligibility.income_tiers.low }}</td>
+          <td>{% if county.ami_80 | fact %}{{ county.ami_80 | usd }}{% else %}Pending HUD verification{% endif %}</td>
+        </tr>
+        <tr>
+          <th scope="row">Moderate income</th>
+          <td>{{ msfh.eligibility.income_tiers.moderate }}</td>
+          <td>{% if county.ami_120 | fact %}{{ county.ami_120 | usd }}{% else %}Pending HUD verification{% endif %}</td>
+        </tr>
+      </tbody>
+    </table>
+    {% if county.ami_source %}
+    <p class="cite">Income limit source: {{ county.ami_source }}</p>
+    {% endif %}
+    <h3>Priority groups (effective {{ msfh.eligibility.priority_groups_effective }})</h3>
+    <ol class="rule-list">
+      {% for group in msfh.eligibility.priority_groups %}
+      <li>{{ group[3:] }}</li>
+      {% endfor %}
+    </ol>
+    <p>{{ msfh.eligibility.application_window_rule }}</p>
+    <h3>What the grant is</h3>
+    <p>Two parts: a free program-assigned wind mitigation inspection, then a matching grant for improvements that inspection recommends. The state pays $2 for every $1 the homeowner spends, up to {{ msfh.grant_terms.max_grant_usd | usd }}. {{ msfh.grant_terms.low_income_exception }}. Reimbursement comes after completed, inspected work; it is not a loan.</p>
+    <p>Basic eligibility: {{ msfh.eligibility.property | lower }}, built before 2008, with insurance Coverage A at or below {{ msfh.eligibility.insured_value_cap_usd | usd }}, and a valid homeowners insurance policy. A program inspection must be completed before any grant is issued.</p>
+    <p class="cite">Apply and confirm details at <a href="{{ msfh.portal }}" rel="noopener">mysafeflhome.com</a>, administered by the {{ msfh.administrator }}.</p>
+    <p><a class="btn-cone" href="/tools/msfh-eligibility/">Check your eligibility</a></p>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 03 / INSURANCE SAVINGS</p>
+    <h2>How the discounts work on a {{ county.name }} premium</h2>
+    <p>Mitigation discounts do not apply to your whole premium. They apply to the windstorm portion, which in Florida typically runs {{ statewide.inspection.windstorm_share_of_premium_pct[0] }} to {{ statewide.inspection.windstorm_share_of_premium_pct[1] }} percent of the total bill. Documented features commonly reduce that portion by {{ statewide.inspection.discount_range_on_windstorm_portion_pct[0] }} to {{ statewide.inspection.discount_range_on_windstorm_portion_pct[1] }} percent. Ranges vary by home, county, and carrier, and savings are never guaranteed.</p>
+    {% if wc.citizens_share_note | fact %}
+    <p>{{ wc.citizens_share_note }}</p>
+    {% endif %}
+    <table class="data-table">
+      <caption>Features the form credits</caption>
+      <thead>
+        <tr><th scope="col">Feature</th><th scope="col">What earns credit</th></tr>
+      </thead>
+      <tbody>
+        {% for f in statewide.inspection.credit_features %}
+        <tr><th scope="row">{{ f.feature }}</th><td>{{ f.detail }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="cite">The discounts are required by law: <a href="http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0627/Sections/0627.0629.html" rel="noopener">Florida Statute 627.0629</a> mandates windstorm premium discounts for documented mitigation features, and <a href="http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0600-0699/0627/Sections/0627.711.html" rel="noopener">Florida Statute 627.711</a> requires insurers to offer them when features are documented.</p>
+    <p><a href="/tools/savings-estimator/">Estimate the range for your premium</a></p>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 04 / FIND AN INSPECTOR</p>
+    <h2>Finding a licensed inspector in {{ county.name }}</h2>
+    <p>Wind mitigation inspections are performed by licensed home inspectors, building contractors, architects, and engineers. A county directory is in the works for this page. Until then, verify any inspector's license directly with the Florida Department of Business and Professional Regulation at <a href="https://www.myfloridalicense.com" rel="noopener">myfloridalicense.com</a>.</p>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">SEC. 05 / FAQ</p>
+    <h2>{{ county.name }} questions</h2>
+    <div class="faq">
+      {% for item in county.faq %}
+      <div class="faq-item">
+        <h3>{{ item.q }}</h3>
+        <p>{{ item.a }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% include "partials/disclaimer.html" %}
+  {% include "partials/cta_insurance.html" %}
+  {% include "partials/contractor_form.html" %}
+
+  <p class="page-stamp">LAST VERIFIED {{ county.last_verified }} / DATA: HUD, FL OIR, FL DFS</p>
+</div>
+{% endblock %}

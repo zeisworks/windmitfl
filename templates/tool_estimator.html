@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% set insp = statewide.inspection %}
+
+{% block title %}Wind Mitigation Savings Estimator | {{ site_name }}{% endblock %}
+{% block description %}Estimate the range a documented wind mitigation report could take off the windstorm portion of a Florida homeowners premium. Transparent math, no guarantees.{% endblock %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <p class="eyebrow">TOOL / SAVINGS ESTIMATOR</p>
+    <h1>Wind mitigation savings estimator</h1>
+    <p>Discounts apply only to the windstorm portion of a premium, typically {{ insp.windstorm_share_of_premium_pct[0] }} to {{ insp.windstorm_share_of_premium_pct[1] }} percent of a Florida bill. Documented features commonly reduce that portion by {{ insp.discount_range_on_windstorm_portion_pct[0] }} to {{ insp.discount_range_on_windstorm_portion_pct[1] }} percent. This tool just does that multiplication for your premium. It runs locally in your browser; nothing is submitted or stored.</p>
+  </header>
+
+  <form id="est-form" class="tool-form">
+    <div class="form-row">
+      <label for="est-premium">Your annual homeowners premium (USD)</label>
+      <input id="est-premium" type="number" min="100" max="100000" step="1" inputmode="numeric" required>
+    </div>
+    <div class="form-row">
+      <label for="est-share">Windstorm share of your premium: <output id="est-share-out">45</output>%</label>
+      <input id="est-share" type="range" min="{{ insp.windstorm_share_of_premium_pct[0] }}" max="{{ insp.windstorm_share_of_premium_pct[1] }}" value="45" step="1">
+      <p class="data-note">If you do not know it, your declarations page or agent can break out the hurricane or windstorm portion.</p>
+    </div>
+    <div class="form-row">
+      <label for="est-disc">Discount on the windstorm portion: <output id="est-disc-out">35</output>%</label>
+      <input id="est-disc" type="range" min="{{ insp.discount_range_on_windstorm_portion_pct[0] }}" max="{{ insp.discount_range_on_windstorm_portion_pct[1] }}" value="35" step="1">
+      <p class="data-note">Depends on which features your report documents and your carrier's filed credits.</p>
+    </div>
+    <button type="submit" class="btn-cone">Estimate</button>
+  </form>
+
+  <div id="est-result" class="tool-result" role="status" aria-live="polite" hidden>
+    <p class="eyebrow">ESTIMATE</p>
+    <p class="data-figure" id="est-point"></p>
+    <p id="est-math" class="data-note"></p>
+    <p id="est-range"></p>
+    <p class="cite">This is arithmetic on typical ranges, not a quote. Actual credits vary by home, county, and carrier, and apply only to features documented on form {{ statewide.form.id }}. Some credits may already be built into your current premium.</p>
+  </div>
+
+  {% include "partials/disclaimer.html" %}
+  {% include "partials/cta_insurance.html" %}
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var SHARE_MIN = {{ insp.windstorm_share_of_premium_pct[0] }}, SHARE_MAX = {{ insp.windstorm_share_of_premium_pct[1] }};
+  var DISC_MIN = {{ insp.discount_range_on_windstorm_portion_pct[0] }}, DISC_MAX = {{ insp.discount_range_on_windstorm_portion_pct[1] }};
+  var form = document.getElementById("est-form");
+  var premium = document.getElementById("est-premium");
+  var share = document.getElementById("est-share");
+  var disc = document.getElementById("est-disc");
+
+  share.addEventListener("input", function () {
+    document.getElementById("est-share-out").value = share.value;
+  });
+  disc.addEventListener("input", function () {
+    document.getElementById("est-disc-out").value = disc.value;
+  });
+
+  function usd(n) {
+    return "$" + Math.round(n).toLocaleString("en-US");
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var pVal = Number(premium.value);
+    if (!pVal) { return; }
+    var sVal = Number(share.value) / 100;
+    var dVal = Number(disc.value) / 100;
+    var point = pVal * sVal * dVal;
+    var lo = pVal * (SHARE_MIN / 100) * (DISC_MIN / 100);
+    var hi = pVal * (SHARE_MAX / 100) * (DISC_MAX / 100);
+    document.getElementById("est-point").textContent = "About " + usd(point) + " per year";
+    document.getElementById("est-math").textContent =
+      usd(pVal) + " premium x " + share.value + "% windstorm portion x " + disc.value + "% discount";
+    document.getElementById("est-range").textContent =
+      "Across the typical Florida ranges (" + SHARE_MIN + " to " + SHARE_MAX + "% windstorm share, " +
+      DISC_MIN + " to " + DISC_MAX + "% discount), the same premium would land between " +
+      usd(lo) + " and " + usd(hi) + " per year.";
+    var box = document.getElementById("est-result");
+    box.hidden = false;
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+})();
+</script>
+{% endblock %}

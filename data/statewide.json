@@ -1,0 +1,111 @@
+{
+  "_comment": "Shared facts rendered across all pages. Every fact has a source. Flagged fields must be confirmed before publish. last_verified is rendered on-page.",
+  "last_verified": "2026-06-11",
+
+  "form": {
+    "name": "Uniform Mitigation Verification Inspection Form",
+    "id": "OIR-B1-1802",
+    "revision": "Rev. 04/26",
+    "effective_date": "2026-04-01",
+    "first_major_revision_in": "over a decade",
+    "basis": "2024 Residential Wind-Loss Mitigation Study commissioned by the Florida Office of Insurance Regulation",
+    "insurers_apply_new_credits": "2026-07 (approximate; carriers expected to begin applying credits based on the new form around July 2026)",
+    "validity_years": 5,
+    "validity_note": "Valid up to five years provided no material changes are made to the structure and no inaccuracies are found",
+    "key_changes": [
+      "Stricter documentation: photos, product approval numbers, and permit records required for credited features",
+      "Features that cannot be documented through a permit or clear visual inspection generally will not receive credit",
+      "Discount tables updated to current building science; some features may earn more, others less, under stricter criteria",
+      "Reports completed before April 2026 may remain valid up to five years, but improvements made since the last inspection may warrant a new inspection under the updated form"
+    ],
+    "statutes": {
+      "discount_mandate": "Florida Statute 627.0629 requires residential property insurers to discount the windstorm portion of premiums based on documented mitigation features; OIR must review and update fixtures, techniques, and related discounts by Jan 1, 2025 and every 5 years after",
+      "insurer_disclosure": "Effective Oct 1, 2023, all residential property insurers must describe available hurricane mitigation discounts on their websites (s. 627.0629)",
+      "offer_requirement": "Florida Statute 627.711 requires insurers to offer discounts when hurricane-resistant construction features are documented"
+    },
+    "sources": [
+      "https://floir.gov/consumers/wind-mitigation-resources/"
+    ]
+  },
+
+  "inspection": {
+    "cost_range_usd": [100, 150],
+    "cost_note": "Typical local cost; prices may rise under the more documentation-heavy 2026 form",
+    "duration": "under an hour for most homes (longer under the 2026 form)",
+    "windstorm_share_of_premium_pct": [30, 60],
+    "discount_range_on_windstorm_portion_pct": [25, 45],
+    "discount_note": "Discounts apply only to the windstorm portion of the premium. Ranges vary by home, county, and carrier. Never present as guaranteed.",
+    "credit_features": [
+      {"feature": "Roof shape", "detail": "Hip roof earns the strongest shape credit"},
+      {"feature": "Roof-to-wall attachment", "detail": "Hurricane clips or straps"},
+      {"feature": "Roof deck attachment", "detail": "Ring-shank nails and nailing pattern"},
+      {"feature": "Secondary water resistance", "detail": "Peel-and-stick underlayment"},
+      {"feature": "Building code era", "detail": "Roof or home built under the 2001 Florida Building Code (effective March 1, 2002) or later earns baseline credit"},
+      {"feature": "Opening protection", "detail": "Impact glass or exterior shutters. All-or-nothing rule: every opening must be protected to earn the credit. Interior treatments do not qualify."}
+    ]
+  },
+
+  "msfh": {
+    "name": "My Safe Florida Home",
+    "administrator": "Florida Department of Financial Services (FL DFS)",
+    "portal": "https://mysafeflhome.com",
+    "portal_vendor": "Neighborly Software",
+    "status": "Open, subject to available funding. Reopened 2025-08-04 for the 2025-26 cycle. Demand exceeds funding; applications queue by priority group, first-come first-served within group.",
+    "current_cycle_funding_usd": "NEEDS_VERIFICATION: sources conflict between $280M and $352M for the 2025-26 cycle. Verify against mysafeflhome.com or the General Appropriations Act before publishing a number.",
+    "backlog": "Approximately 45,000 homeowners with completed inspections were awaiting grants as of mid-2026 (NEEDS_VERIFICATION against current DFS reporting before publish)",
+    "fy2026_27": "Florida lawmakers reached a budget deal (floor vote 2026-05-29) reappropriating over $405M in unused funds across MSFH and the My Safe Florida Condo Pilot, aimed largely at the inspection-to-grant backlog. Signing expected June 2026. NEEDS_VERIFICATION: confirm signature and final amounts.",
+    "tax_package": "Separate ~$150M tax-relief package includes a three-year sales tax exemption on impact windows and doors. NEEDS_VERIFICATION: confirm enactment and effective dates.",
+    "structure": [
+      "Free program-assigned wind mitigation inspection for eligible homeowners",
+      "Matching grant for improvements recommended in that inspection report. Reimbursement after completed, inspected work. Not a loan."
+    ],
+    "grant_terms": {
+      "max_grant_usd": 10000,
+      "match": "2:1 state match (state pays $2 per $1 homeowner spends) up to the cap",
+      "low_income_exception": "Low-income homeowners may receive up to $10,000 without the matching requirement"
+    },
+    "eligibility": {
+      "property": "Site-built, single-family, owner-occupied primary residence with homestead exemption",
+      "build_year": "Built before 2008 (program rule references permit/build predating Jan 1, 2008)",
+      "insured_value_cap_usd": 700000,
+      "insured_value_note": "Insurance Coverage A at or below $700,000; cap waived for low-income applicants per program materials (NEEDS_VERIFICATION on the waiver detail)",
+      "insurance_required": "Must carry a valid homeowners insurance policy",
+      "inspection_first": "A program wind mitigation inspection must be completed before a grant is issued; only improvements recommended in the inspection report are eligible",
+      "income_limit_this_cycle": "2025-26 cycle limited to low- and moderate-income homeowners. Higher-income homeowners are not eligible this cycle (a change from earlier years).",
+      "income_tiers": {
+        "low": "Household income at or below 80% of county median income",
+        "moderate": "Above 80% and at or below 120% of county median income"
+      },
+      "priority_groups_effective": "2025-07-05",
+      "priority_groups": [
+        "1. Low-income homeowners age 60+",
+        "2. Low-income homeowners under 60",
+        "3. Moderate-income homeowners age 60+",
+        "4. Moderate-income homeowners under 60"
+      ],
+      "application_window_rule": "For the first 60 days of a new application period, priority groups apply; after that window the general (eligible) pool opens. Once funding runs out, applicants are waitlisted for the next cycle."
+    },
+    "eligible_improvements": [
+      "Opening protection: impact-rated windows, impact-rated exterior doors, hurricane shutters, qualifying garage doors (only openings flagged in the inspection report)",
+      "Roof-to-wall connection upgrades",
+      "Roof deck attachment upgrades",
+      "Secondary water resistance"
+    ],
+    "contractor_rule": "No set MSFH contractor list since mid-2024; homeowners may use any Florida state-certified contractor. Verify licenses at myfloridalicense.com (DBPR). Do not sign a contract or begin work before grant approval.",
+    "outcomes": {
+      "share_reporting_savings_pct": 49,
+      "avg_reported_annual_savings_usd": 981,
+      "note": "Voluntary reporting; savings are not guaranteed and typically require comprehensive hardening rather than a single feature. Always present with this caveat."
+    },
+    "changelog": [
+      {"date": "2026-06-11", "entry": "FY2026-27 budget reappropriating $405M+ across MSFH and the Condo Pilot awaits the Governor's signature (expected June 2026)."},
+      {"date": "2025-08-04", "entry": "Application portal reopened for the 2025-26 cycle, limited to low- and moderate-income homeowners, with age/income priority groups."},
+      {"date": "2025-07-05", "entry": "New priority-group ordering took effect (low-income 60+ first)."}
+    ]
+  },
+
+  "monetization": {
+    "profitise_embed": "PLACEHOLDER: Jack supplies the publisher embed snippet",
+    "consent_language_status": "DRAFT ONLY: TCPA-style consent copy requires legal review before any lead form goes live"
+  }
+}

@@ -1,0 +1,50 @@
+{# Phase 3 lead form component. Routing endpoint is a placeholder until Jack
+   wires it. Consent copy is DRAFT ONLY and requires legal review before this
+   form goes live (see statewide.json.monetization.consent_language_status). #}
+<!-- LEGAL REVIEW REQUIRED: TCPA consent copy below is draft. Do not activate routing before review. -->
+<!-- LEAD_ENDPOINT_PLACEHOLDER: set form action to the lead intake endpoint. -->
+<section class="cta-contractor">
+  <p class="eyebrow">QUOTES / {{ county.name | upper }}</p>
+  <h2>Request quotes for opening protection or roof work</h2>
+  <p>If an inspection report recommends impact windows, shutters, or roof work, getting more than one quote from a Florida state-certified contractor is the norm. Verify any license at <a href="https://www.myfloridalicense.com" rel="noopener">myfloridalicense.com</a> before signing anything.</p>
+  <form class="lead-form" method="post" action="#" data-endpoint="PLACEHOLDER">
+    <div class="form-row">
+      <label for="lead-name">Name</label>
+      <input id="lead-name" name="name" type="text" autocomplete="name" required>
+    </div>
+    <div class="form-row">
+      <label for="lead-email">Email</label>
+      <input id="lead-email" name="email" type="email" autocomplete="email" required>
+    </div>
+    <div class="form-row">
+      <label for="lead-phone">Phone</label>
+      <input id="lead-phone" name="phone" type="tel" autocomplete="tel" required>
+    </div>
+    <div class="form-row">
+      <label for="lead-work">Type of work</label>
+      <select id="lead-work" name="work_type" required>
+        <option value="">Select one</option>
+        <option value="opening-protection">Opening protection (windows, doors, shutters)</option>
+        <option value="roof">Roof work</option>
+        <option value="other">Other mitigation work</option>
+      </select>
+    </div>
+    <input type="hidden" name="county" value="{{ county.slug }}">
+    <div class="form-row form-consent">
+      <input id="lead-consent" name="consent" type="checkbox" value="yes" required>
+      <label for="lead-consent">I agree to be contacted at the number and email provided, including by autodialed or prerecorded calls and texts, by contractors responding to this request. Consent is not a condition of purchase. Message and data rates may apply. See the <a href="/privacy/">privacy policy</a>.</label>
+    </div>
+    <button type="submit" class="btn-cone">Request quotes</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </form>
+  <script>
+    (function () {
+      var form = document.querySelector(".lead-form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        form.querySelector(".form-status").textContent =
+          "Quote routing is not live yet. This form will activate when contractor matching launches.";
+      });
+    })();
+  </script>
+</section>

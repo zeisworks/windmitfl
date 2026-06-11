@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% set el = statewide.msfh.eligibility %}
+
+{% block title %}My Safe Florida Home Eligibility Checker | {{ site_name }}{% endblock %}
+{% block description %}Answer six questions to see whether you are likely eligible for a My Safe Florida Home inspection and grant this cycle, and which priority group you would fall into.{% endblock %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <p class="eyebrow">TOOL / MSFH ELIGIBILITY</p>
+    <h1>My Safe Florida Home eligibility checker</h1>
+    <p>Six questions, answered locally in your browser. Nothing is submitted or stored. This is an informational screening against the published program rules; the Florida Department of Financial Services makes every actual determination at <a href="{{ statewide.msfh.portal }}" rel="noopener">mysafeflhome.com</a>.</p>
+  </header>
+
+  <form id="elig-form" class="tool-form">
+    <fieldset>
+      <legend>1. Is the home a site-built, single-family house that you own and occupy as your primary residence, with a homestead exemption?</legend>
+      <label><input type="radio" name="property" value="yes" required> Yes</label>
+      <label><input type="radio" name="property" value="no"> No</label>
+    </fieldset>
+    <fieldset>
+      <legend>2. Was the home built before 2008?</legend>
+      <label><input type="radio" name="built" value="yes" required> Yes</label>
+      <label><input type="radio" name="built" value="no"> No</label>
+      <label><input type="radio" name="built" value="unsure"> Not sure</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. Do you carry a valid homeowners insurance policy on the home?</legend>
+      <label><input type="radio" name="insured" value="yes" required> Yes</label>
+      <label><input type="radio" name="insured" value="no"> No</label>
+    </fieldset>
+    <fieldset>
+      <legend>4. Is your dwelling coverage (Coverage A) {{ el.insured_value_cap_usd | usd }} or less?</legend>
+      <label><input type="radio" name="coverage" value="yes" required> Yes</label>
+      <label><input type="radio" name="coverage" value="no"> No</label>
+      <label><input type="radio" name="coverage" value="unsure"> Not sure</label>
+    </fieldset>
+    <fieldset>
+      <legend>5. How does your household income compare with your county's median income? County dollar thresholds are published on each county page as they are verified; HUD income limits are the underlying source.</legend>
+      <label><input type="radio" name="income" value="low" required> At or below 80% of the county median</label>
+      <label><input type="radio" name="income" value="moderate"> Above 80%, up to 120% of the county median</label>
+      <label><input type="radio" name="income" value="high"> Above 120% of the county median</label>
+      <label><input type="radio" name="income" value="unsure"> Not sure</label>
+    </fieldset>
+    <fieldset>
+      <legend>6. Is any applicant homeowner age 60 or older?</legend>
+      <label><input type="radio" name="senior" value="yes" required> Yes</label>
+      <label><input type="radio" name="senior" value="no"> No</label>
+    </fieldset>
+    <button type="submit" class="btn-cone">See where you stand</button>
+  </form>
+
+  <div id="elig-result" class="tool-result" role="status" aria-live="polite" hidden>
+    <p class="eyebrow">RESULT</p>
+    <div id="elig-result-body"></div>
+    <p class="cite">Screening only. Eligibility, priority, and funding are determined by the Florida Department of Financial Services. {{ el.application_window_rule }} Apply at <a href="{{ statewide.msfh.portal }}" rel="noopener">mysafeflhome.com</a>.</p>
+  </div>
+
+  {% include "partials/disclaimer.html" %}
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var form = document.getElementById("elig-form");
+  var box = document.getElementById("elig-result");
+  var body = document.getElementById("elig-result-body");
+
+  var GROUPS = {
+    low_senior: "Priority group 1: low-income homeowners age 60 and older.",
+    low: "Priority group 2: low-income homeowners under 60.",
+    moderate_senior: "Priority group 3: moderate-income homeowners age 60 and older.",
+    moderate: "Priority group 4: moderate-income homeowners under 60."
+  };
+
+  function p(text) {
+    var el = document.createElement("p");
+    el.textContent = text;
+    return el;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var d = new FormData(form);
+    var blockers = [];
+    var notes = [];
+
+    if (d.get("property") === "no") {
+      blockers.push("The program covers site-built, single-family, owner-occupied primary residences with a homestead exemption. The home as described would not qualify.");
+    }
+    if (d.get("built") === "no") {
+      blockers.push("The program covers homes built before 2008. A newer home would not qualify.");
+    } else if (d.get("built") === "unsure") {
+      notes.push("Check the build year on your county property appraiser's site; the program rule references construction predating January 1, 2008.");
+    }
+    if (d.get("insured") === "no") {
+      blockers.push("A valid homeowners insurance policy is required.");
+    }
+    if (d.get("coverage") === "no") {
+      blockers.push("Insurance Coverage A must be at or below $700,000.");
+    } else if (d.get("coverage") === "unsure") {
+      notes.push("Coverage A (dwelling coverage) is listed on your policy's declarations page; it must be $700,000 or less.");
+    }
+    if (d.get("income") === "high") {
+      blockers.push("The current cycle is limited to low- and moderate-income homeowners. Household income above 120% of the county median is not eligible this cycle.");
+    }
+
+    body.textContent = "";
+    if (blockers.length) {
+      body.appendChild(p("Based on your answers, you are unlikely to qualify this cycle:"));
+      blockers.forEach(function (b) { body.appendChild(p(b)); });
+    } else {
+      var income = d.get("income");
+      var senior = d.get("senior") === "yes";
+      if (income === "unsure") {
+        body.appendChild(p("You clear the property, build-year, and insurance rules as answered. Eligibility this cycle then comes down to income: at or below 80% of your county's median income is the low tier, and up to 120% is the moderate tier. HUD publishes the dollar thresholds; verified figures appear on each county page."));
+      } else {
+        var key = income + (senior ? "_senior" : "");
+        body.appendChild(p("Based on your answers, you appear to meet the published eligibility rules for this cycle."));
+        body.appendChild(p(GROUPS[key]));
+        body.appendChild(p("Applications queue by priority group, first-come first-served within each group, subject to available funding."));
+      }
+    }
+    notes.forEach(function (n) { body.appendChild(p(n)); });
+    box.hidden = false;
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+})();
+</script>
+{% endblock %}

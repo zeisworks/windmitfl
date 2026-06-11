@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}Independent navigator for Florida wind mitigation inspections, insurance discounts, and My Safe Florida Home grants.{% endblock %}">
+  <link rel="canonical" href="{{ page.canonical }}">
+  {% if page.noindex %}
+  <meta name="robots" content="noindex">
+  {% endif %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=IBM+Plex+Mono:wght@500&family=Public+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/site.css">
+  <script type="application/ld+json">{{ page.breadcrumb_jsonld | safe }}</script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap site-header-inner">
+    <a class="wordmark" href="/">
+      <span class="wordmark-name">WindMitFL</span>
+      <span class="wordmark-tag">Florida wind mitigation navigator</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/#counties">Counties</a>
+      <a href="/guides/">Guides</a>
+      <a href="/tools/msfh-eligibility/">Eligibility Checker</a>
+      <a href="/tools/savings-estimator/">Savings Estimator</a>
+    </nav>
+  </div>
+</header>
+{% block advisory %}{% endblock %}
+<main id="main">
+  {% if page.crumbs | length > 1 %}
+  <nav class="wrap crumbs" aria-label="Breadcrumb">
+    {% for name, url in page.crumbs %}
+      {% if not loop.last %}<a href="{{ url }}">{{ name }}</a> <span aria-hidden="true">/</span> {% else %}<span aria-current="page">{{ name }}</span>{% endif %}
+    {% endfor %}
+  </nav>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-brand">WindMitFL</p>
+    <p>An independent information resource about Florida wind mitigation inspections, insurance discounts, and the My Safe Florida Home program. Not affiliated with the State of Florida, the Department of Financial Services, the Office of Insurance Regulation, or any insurer, inspector, or contractor.</p>
+    <p>Nothing on this site is insurance, financial, or legal advice. Discounts and grant awards are determined by carriers and state agencies, not by this site. Verify program details with the primary sources linked on each page.</p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/guides/">Guides</a>
+      <a href="/tools/msfh-eligibility/">MSFH Eligibility Checker</a>
+      <a href="/tools/savings-estimator/">Savings Estimator</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+    </nav>
+    <p class="footer-stamp">STATEWIDE FACTS LAST VERIFIED {{ statewide.last_verified }}</p>
+  </div>
+</footer>
+</body>
+</html>

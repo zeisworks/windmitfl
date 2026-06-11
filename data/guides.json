@@ -1,0 +1,85 @@
+{
+  "_comment": "Guide metadata. Bodies live in content/guides/{slug}.html. Order here is publication order. insurance_cta places the Profitise comparison component at the end of the guide.",
+  "guides": [
+    {
+      "number": 1,
+      "slug": "2026-wind-mitigation-form-explained",
+      "eyebrow": "THE 2026 FORM",
+      "title": "The 2026 wind mitigation form explained: what changed on OIR-B1-1802",
+      "description": "Florida revised its wind mitigation inspection form effective April 1, 2026, the first major update in over a decade. What the new documentation rules mean for your discounts.",
+      "insurance_cta": true
+    },
+    {
+      "number": 2,
+      "slug": "my-safe-florida-home-application-walkthrough",
+      "eyebrow": "MSFH PROGRAM",
+      "title": "My Safe Florida Home application walkthrough for the current cycle",
+      "description": "Step by step through the My Safe Florida Home application: eligibility rules, priority groups, the free inspection, the matching grant, and what not to do before approval.",
+      "insurance_cta": false
+    },
+    {
+      "number": 3,
+      "slug": "my-safe-florida-home-backlog",
+      "eyebrow": "MSFH PROGRAM",
+      "title": "The My Safe Florida Home backlog: why homeowners wait, and what the 2026-27 budget does",
+      "description": "Why the inspection-to-grant queue exists, how priority groups order the line, and what the budget passed in May 2026 is meant to fix.",
+      "insurance_cta": false
+    },
+    {
+      "number": 4,
+      "slug": "wind-mitigation-inspection-cost",
+      "eyebrow": "INSPECTION",
+      "title": "Wind mitigation inspection cost and what happens during one",
+      "description": "What a Florida wind mitigation inspection costs, how long it takes, what the inspector documents, and why the 2026 form made the visit more thorough.",
+      "insurance_cta": true
+    },
+    {
+      "number": 5,
+      "slug": "hip-roof-wind-mitigation-credit",
+      "eyebrow": "FEATURE / ROOF SHAPE",
+      "title": "Roof shape credits: hip vs gable on the wind mitigation form",
+      "description": "Why a hip roof earns the strongest shape credit on Florida's wind mitigation form, how roof shape is measured, and what you can and cannot do about it.",
+      "insurance_cta": true
+    },
+    {
+      "number": 6,
+      "slug": "roof-to-wall-attachment-clips-vs-straps",
+      "eyebrow": "FEATURE / ROOF-TO-WALL",
+      "title": "Roof-to-wall attachment: clips, straps, and the credit between them",
+      "description": "How hurricane clips and straps are credited on the wind mitigation form, how inspectors document the connection, and where My Safe Florida Home grants fit.",
+      "insurance_cta": true
+    },
+    {
+      "number": 7,
+      "slug": "roof-deck-attachment-ring-shank-nails",
+      "eyebrow": "FEATURE / ROOF DECK",
+      "title": "Roof deck attachment and ring-shank nails",
+      "description": "What roof deck attachment means on the wind mitigation form, why ring-shank nails and nailing pattern matter, and when the credit gets documented.",
+      "insurance_cta": true
+    },
+    {
+      "number": 8,
+      "slug": "secondary-water-resistance",
+      "eyebrow": "FEATURE / SWR",
+      "title": "Secondary water resistance: the peel-and-stick credit",
+      "description": "What secondary water resistance is, why it is usually added during reroofing, and how it is credited and documented on Florida's wind mitigation form.",
+      "insurance_cta": true
+    },
+    {
+      "number": 9,
+      "slug": "opening-protection-all-or-nothing",
+      "eyebrow": "FEATURE / OPENINGS",
+      "title": "Opening protection and the all-or-nothing rule",
+      "description": "Impact glass and shutters earn one of the form's major credits, but only if every opening is protected. How the all-or-nothing rule works and what qualifies.",
+      "insurance_cta": true
+    },
+    {
+      "number": 10,
+      "slug": "expired-wind-mitigation-report",
+      "eyebrow": "REPORTS / VALIDITY",
+      "title": "My wind mitigation report expired or predates the new form: what to do",
+      "description": "Wind mitigation reports last up to five years. When an old report still works, when the 2026 form makes a new inspection worth it, and how to decide.",
+      "insurance_cta": true
+    }
+  ]
+}

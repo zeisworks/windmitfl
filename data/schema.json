@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "windmitfl county record",
+  "description": "One file per county in data/counties/. A county page renders only when required fields are real values, not NEEDS_VERIFICATION strings. The generator must skip (and log) counties with unverified required fields. Keys beginning with an underscore are editorial notes for researchers and must never be rendered.",
+  "type": "object",
+  "required": [
+    "slug",
+    "name",
+    "last_verified",
+    "ami_80",
+    "ami_120",
+    "windstorm_context",
+    "faq"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "description": "URL slug, e.g. miami-dade"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name, e.g. Miami-Dade County"
+    },
+    "last_verified": {
+      "type": "string",
+      "format": "date",
+      "description": "Rendered on-page; update whenever county data is re-verified"
+    },
+    "region": {
+      "type": "string",
+      "description": "e.g. South Florida, Tampa Bay, Panhandle"
+    },
+    "population_note": {
+      "type": "string"
+    },
+    "ami_source": {
+      "type": "string",
+      "description": "Source for AMI figures. Use HUD income limits for the county/metro, current FY. Required."
+    },
+    "ami_80": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "description": "80% of county median income threshold (low-income line) in USD. HUD FY figure. String only if NEEDS_VERIFICATION."
+    },
+    "ami_120": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "description": "120% of county median income threshold (moderate-income ceiling) in USD."
+    },
+    "windstorm_context": {
+      "type": "object",
+      "description": "County premium context. Source from OIR rate filings and Citizens exposure data. Never invent.",
+      "properties": {
+        "avg_annual_premium_usd": {
+          "type": [
+            "number",
+            "string"
+          ]
+        },
+        "premium_source": {
+          "type": "string"
+        },
+        "citizens_share_note": {
+          "type": "string",
+          "description": "Citizens Property Insurance presence in this county, if notable"
+        },
+        "risk_designation": {
+          "type": "string",
+          "description": "Plain-language wind exposure framing for the advisory header, e.g. 'Coastal high wind exposure'. Keep factual, no fear copy."
+        }
+      }
+    },
+    "wind_borne_debris_region": {
+      "type": "string",
+      "description": "Whether the county includes Wind-Borne Debris Region / HVHZ areas (Miami-Dade and Broward are the High-Velocity Hurricane Zone under the FBC). Affects opening-protection requirements."
+    },
+    "cities": {
+      "type": "array",
+      "description": "Only cities that get their own page. Omit entirely until city-level data and search-volume justification exist.",
+      "items": {
+        "type": "object",
+        "required": [
+          "slug",
+          "name"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "inspectors": {
+      "type": "array",
+      "description": "Phase 2: populated by DBPR license scrape. featured=true rows are paid placements.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "license_type": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "boolean",
+            "default": false
+          },
+          "verified_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "array",
+      "minItems": 4,
+      "description": "County-localized FAQ. Rendered with FAQPage JSON-LD.",
+      "items": {
+        "type": "object",
+        "required": [
+          "q",
+          "a"
+        ],
+        "properties": {
+          "q": {
+            "type": "string"
+          },
+          "a": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

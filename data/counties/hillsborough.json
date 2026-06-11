@@ -1,0 +1,46 @@
+{
+  "slug": "hillsborough",
+  "name": "Hillsborough County",
+  "last_verified": "2026-06-11",
+  "region": "Tampa Bay",
+  "population_note": "Tampa metro core county",
+  "ami_source": "HUD FY2026 income limits, Tampa-St. Petersburg-Clearwater MSA",
+  "ami_80": "NEEDS_VERIFICATION: HUD FY2026 80% AMI for Hillsborough County",
+  "ami_120": "NEEDS_VERIFICATION: 120% of HUD FY2026 median family income for Hillsborough County",
+  "windstorm_context": {
+    "avg_annual_premium_usd": "NEEDS_VERIFICATION: OIR rate data / QUASR county averages",
+    "premium_source": "Florida Office of Insurance Regulation",
+    "citizens_share_note": "NEEDS_VERIFICATION: Citizens policy count for Hillsborough County",
+    "risk_designation": "Coastal high wind exposure",
+    "_premium_editor_note": "Do not publish a figure without OIR sourcing."
+  },
+  "wind_borne_debris_region": "Portions of Hillsborough fall within the Wind-Borne Debris Region under the Florida Building Code.",
+  "faq": [
+    {
+      "q": "How much does a wind mitigation inspection cost in Hillsborough?",
+      "a": "Typically around $100 to $150, and the report is valid for up to five years if nothing material changes on the home. Prices may run higher under the documentation requirements of the form revised in April 2026."
+    },
+    {
+      "q": "Do I qualify for a My Safe Florida Home grant in Hillsborough?",
+      "a": "For the current cycle the program is limited to low- and moderate-income homeowners: household income at or below 80% of the county median qualifies as low income, and up to 120% as moderate income. The home must be a site-built, owner-occupied primary residence with homestead exemption, built before 2008, with insurance Coverage A of $700,000 or less. The exact dollar thresholds for Hillsborough are shown above."
+    },
+    {
+      "q": "Did the wind mitigation form change?",
+      "a": "Yes. The OIR-B1-1802 form was revised effective April 1, 2026, the first major update in over a decade. Inspectors must now document credited features with photos, product approval numbers, and permits, and carriers are expected to begin applying credits based on the new form around July 2026."
+    },
+    {
+      "q": "Is my older wind mitigation report still valid?",
+      "a": "Reports remain valid for up to five years. But if you have replaced your roof, windows, or doors since your last inspection, a new inspection under the 2026 form may capture credits your old report misses."
+    },
+    {
+      "q": "Does opening protection have to cover every window and door?",
+      "a": "Yes. Opening protection is scored all-or-nothing: every opening needs qualifying protection (impact glass or rated exterior shutters) to earn the credit."
+    },
+    {
+      "q": "How much can the discount actually save?",
+      "a": "Discounts apply to the windstorm portion of the premium, which is often 30 to 60% of the total bill in Florida. Among My Safe Florida Home grant recipients who reported outcomes, about 49% reported savings, averaging roughly $981 per year. Savings are not guaranteed and depend on the home, the features documented, and the carrier."
+    }
+  ],
+  "_ami_editor_note": "Pull current figures from huduser.gov before publish.",
+  "_wbdr_editor_note": "Verify parcel-level applicability before publish."
+}

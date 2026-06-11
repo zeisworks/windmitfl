@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Florida Wind Mitigation Guides | {{ site_name }}{% endblock %}
+{% block description %}Plain-language guides to the 2026 wind mitigation form, My Safe Florida Home grants, inspection costs, and each credited feature, with primary sources.{% endblock %}
+
+{% block content %}
+<div class="wrap">
+  <header class="page-head">
+    <p class="eyebrow">GUIDES / INDEX</p>
+    <h1>The guides</h1>
+    <p>Each guide explains one piece of Florida's wind mitigation system. Every factual claim traces to the Office of Insurance Regulation, the Department of Financial Services, the Florida Statutes, or the My Safe Florida Home program, linked inline.</p>
+  </header>
+  <ol class="guide-cards">
+    {% for g in guides %}
+    <li class="guide-card">
+      <p class="eyebrow">GUIDE {{ "%02d" | format(loop.index) }}</p>
+      <h2><a href="/guides/{{ g.slug }}/">{{ g.title }}</a></h2>
+      <p>{{ g.description }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+  {% include "partials/disclaimer.html" %}
+</div>
+{% endblock %}
