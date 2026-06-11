@@ -1,38 +1,39 @@
 {
-  "slug": "pinellas",
-  "name": "Pinellas County",
+  "slug": "manatee",
+  "name": "Manatee County",
   "last_verified": "2026-06-11",
-  "region": "Tampa Bay",
-  "population_note": "Densest county in Florida; nearly all coastal",
-  "ami_source": "HUD FY2026 income limits, Tampa-St. Petersburg-Clearwater MSA (low-income limit, 4-person household); 120% figure from the Florida Housing Finance Corporation 2026 Combined Income and Rent Limits (4-person household). Limits vary by household size; the program directs applicants to huduser.gov for income eligibility.",
-  "ami_80": 91750,
-  "ami_120": 137640,
+  "region": "Southwest Florida",
+  "population_note": "Bradenton, northern half of the Sarasota metro",
+  "ami_source": "HUD FY2026 income limits, North Port-Bradenton-Sarasota, FL MSA (low-income limit, 4-person household); 120% figure from the Florida Housing Finance Corporation 2026 Combined Income and Rent Limits (4-person household). Limits vary by household size; the program directs applicants to huduser.gov for income eligibility.",
+  "ami_80": 91300,
+  "ami_120": 136920,
   "_ami_sources": [
     "https://www.huduser.gov/portal/datasets/il/il26/Section8-FY26.xlsx",
     "https://flhousingdata.shimberg.ufl.edu/income-and-rent-limits/results?nid=1",
     "https://msfh-program.helpjuice.com/en_US/MSFH-Homeowners-Guide-2025-2026/hurricane-mitigation-grants"
   ],
   "_ami_method_note": "ami_80 is HUD's published FY2026 low-income (80%) limit, 4-person, effective 2026-05-01; MSFH materials point applicants to the HUD income limits page. ami_120 is the FHFC 2026 chart figure (2.4x the HUD very-low limit, the state's standard 120% method); MSFH publishes no dollar table of its own and has not pinned a moderate-income formula, so present 120% as the standard state figure, not a program guarantee.",
+  "_ami_editor_note": "Verified 2026-06-11 against HUD FY2026 (effective 2026-05-01) and the FHFC 2026 chart. Re-verify when HUD posts FY2027 limits (spring 2027) or if MSFH publishes its own dollar table.",
   "windstorm_context": {
-    "avg_annual_premium_usd": 4044,
+    "avg_annual_premium_usd": 3187,
     "premium_source": "Florida Office of Insurance Regulation, Property Insurance Stability Report, January 1, 2026 (average homeowners premium including wind coverage, Market Intelligence Report data as of September 30, 2025)",
     "premium_source_url": "https://floir.gov/docs-sf/default-source/property-and-casualty/stability-unit-reports/january-2026-isu-report-final.pdf",
-    "premium_excl_wind_usd": 1680,
-    "citizens_share_note": "Citizens Property Insurance, the state-backed insurer of last resort, held 22,019 personal residential policies in Pinellas as of April 30, 2026, out of 289,824 personal residential policies statewide.",
+    "premium_excl_wind_usd": 1743,
+    "citizens_share_note": "Citizens Property Insurance, the state-backed insurer of last resort, held 5,698 personal residential policies in Manatee as of April 30, 2026, out of 289,824 personal residential policies statewide.",
     "citizens_source_url": "https://www.citizensfla.com/policies-in-force",
     "citizens_as_of": "2026-04-30",
     "risk_designation": "Coastal high wind exposure",
     "_premium_editor_note": "Re-verify when OIR publishes the July 2026 Stability Report. Citizens counts are dropping fast month over month; re-verify monthly."
   },
-  "wind_borne_debris_region": "Most of Pinellas falls within the Wind-Borne Debris Region under the Florida Building Code.",
+  "wind_borne_debris_region": "Portions of Manatee County fall within the Wind-Borne Debris Region under the Florida Building Code.",
   "faq": [
     {
-      "q": "How much does a wind mitigation inspection cost in Pinellas?",
+      "q": "How much does a wind mitigation inspection cost in Manatee?",
       "a": "Typically around $100 to $150, and the report is valid for up to five years if nothing material changes on the home. Prices may run higher under the documentation requirements of the form revised in April 2026."
     },
     {
-      "q": "Do I qualify for a My Safe Florida Home grant in Pinellas?",
-      "a": "For the current cycle the program is limited to low- and moderate-income homeowners: household income at or below 80% of the county median qualifies as low income, and up to 120% as moderate income. The home must be a site-built, owner-occupied primary residence with homestead exemption, built before 2008, with insurance Coverage A of $700,000 or less. The exact dollar thresholds for Pinellas are shown above."
+      "q": "Do I qualify for a My Safe Florida Home grant in Manatee?",
+      "a": "For the current cycle the program is limited to low- and moderate-income homeowners: household income at or below 80% of the county median qualifies as low income, and up to 120% as moderate income. The home must be a site-built, owner-occupied primary residence with homestead exemption, built before 2008, with insurance Coverage A of $700,000 or less. The exact dollar thresholds for Manatee are shown above."
     },
     {
       "q": "Did the wind mitigation form change?",
@@ -51,6 +52,5 @@
       "a": "Discounts apply to the windstorm portion of the premium, which is often 30 to 60% of the total bill in Florida. Among My Safe Florida Home grant recipients who reported outcomes, about 49% reported savings, averaging roughly $981 per year. Savings are not guaranteed and depend on the home, the features documented, and the carrier."
     }
   ],
-  "_ami_editor_note": "Verified 2026-06-11 against HUD FY2026 (effective 2026-05-01) and the FHFC 2026 chart. Re-verify when HUD posts FY2027 limits (spring 2027) or if MSFH publishes its own dollar table.",
   "_wbdr_editor_note": "Verify parcel-level applicability before publish."
 }

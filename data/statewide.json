@@ -1,5 +1,13 @@
 {
   "_comment": "Shared facts rendered across all pages. Every fact has a source. Flagged fields must be confirmed before publish. last_verified is rendered on-page.",
+  "_reviews": [
+    {"path": "msfh.fy2026_27", "review_by": "2026-07-01", "reason": "HB 5001E awaiting Governor's signature; confirm signature and surviving line items, then update status and changelog."},
+    {"path": "msfh.tax_package", "review_by": "2026-07-01", "reason": "HB 7031E awaiting Governor's signature; confirm enactment before the refund window opens 2026-07-01."},
+    {"path": "msfh.eligibility", "review_by": "2026-07-01", "reason": "s. 215.5586(2)(a)7 (income-limited cycle, 24-month inspection recency, suspended low-income cap exemption) sunsets 2026-07-01 unless amended; re-verify the statute and program terms, then update eligibility copy and the checker."},
+    {"path": "counties.*.windstorm_context.avg_annual_premium_usd", "review_by": "2026-07-31", "reason": "OIR publishes the July 2026 Property Insurance Stability Report with fresh county average premiums."},
+    {"path": "counties.*.windstorm_context.citizens_share_note", "review_by": "2026-07-15", "reason": "Citizens posts monthly policies-in-force counts; counts are dropping fast (392,689 in Jan 2026 to 294,894 in Apr 2026)."},
+    {"path": "counties.*.ami_80", "review_by": "2027-05-01", "reason": "HUD FY2027 income limits expected spring 2027; FHFC chart follows."}
+  ],
   "last_verified": "2026-06-11",
 
   "form": {
@@ -51,10 +59,18 @@
     "portal": "https://mysafeflhome.com",
     "portal_vendor": "Neighborly Software",
     "status": "Open, subject to available funding. Reopened 2025-08-04 for the 2025-26 cycle. Demand exceeds funding; applications queue by priority group, first-come first-served within group.",
-    "current_cycle_funding_usd": "NEEDS_VERIFICATION: sources conflict between $280M and $352M for the 2025-26 cycle. Verify against mysafeflhome.com or the General Appropriations Act before publishing a number.",
-    "backlog": "Approximately 45,000 homeowners with completed inspections were awaiting grants as of mid-2026 (NEEDS_VERIFICATION against current DFS reporting before publish)",
-    "fy2026_27": "Florida lawmakers reached a budget deal (floor vote 2026-05-29) reappropriating over $405M in unused funds across MSFH and the My Safe Florida Condo Pilot, aimed largely at the inspection-to-grant backlog. Signing expected June 2026. NEEDS_VERIFICATION: confirm signature and final amounts.",
-    "tax_package": "Separate ~$150M tax-relief package includes a three-year sales tax exemption on impact windows and doors. NEEDS_VERIFICATION: confirm enactment and effective dates.",
+    "current_cycle_funding": {
+      "appropriated_usd": 280000000,
+      "total_available_usd": 352000000,
+      "note": "The FY2025-26 General Appropriations Act (Specific Appropriations 2139-2141, ch. 2025-199) provided about $280 million in new MSFH funding. DFS added residual funds from roughly 7,200 expired prior-year grants, bringing the total available for the 2025-26 cycle to about $352 million when the portal reopened on 2025-08-04. Neither figure includes the My Safe Florida Condo Pilot.",
+      "sources": [
+        "https://www.wusf.org/weather/2025-08-11/my-safe-florida-home-reopens-with-352m-in-funds-and-new-eligibility-requirements",
+        "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0200-0299/0215/Sections/0215.5586.html"
+      ]
+    },
+    "backlog": "Roughly 45,000 homeowners with completed inspections were awaiting grants per the Governor's February 2025 budget request; the same figure was still being cited in May 2026 coverage of the FY2026-27 budget deal. No fresher DFS count located as of 2026-06-11; the live queue is plausibly smaller since the 2025-26 cycle was expected to fund up to roughly 33,000 grants. Always present with the early-2025 attribution, not as a current count.",
+    "fy2026_27": "The FY2026-27 General Appropriations Act (HB 5001E, 2026 Special Session E) passed both chambers on 2026-05-29, reappropriating unused prior-year funds of roughly $378 million for MSFH and $27 million for the My Safe Florida Condominium Pilot (about $405 million combined, no new money), aimed largely at the inspection-to-grant backlog. NOT YET SIGNED as of 2026-06-11; signature required before July 1 and line-item vetoes are possible. Render as 'passed the Legislature, awaiting the Governor's signature'. Sources: https://www.flsenate.gov/Session/Bill/2026E/5001E and https://www.floridarealtors.org/advocacy/2026-legislative-final-report",
+    "tax_package": "The 2026 tax package (HB 7031E) passed both chambers 2026-05-29 and awaits the Governor's signature as of 2026-06-11. It includes a three-year sales tax break on impact-resistant windows, doors, and garage doors, structured as a refund for purchases made between 2026-07-01 and 2029-06-30 (not a point-of-sale exemption, and not permanent). The Senate values the full package at $272.2 million in state and local cuts; the ~$150 million figure circulating refers to the package's state relief, not the windows/doors item alone. Sources: https://www.flsenate.gov/Session/Bill/2026E/7031E and https://www.flsenate.gov/PublishedContent/Offices/President/5_27_26_Tax_Package_Floor.pdf",
     "structure": [
       "Free program-assigned wind mitigation inspection for eligible homeowners",
       "Matching grant for improvements recommended in that inspection report. Reimbursement after completed, inspected work. Not a loan."
@@ -68,9 +84,10 @@
       "property": "Site-built, single-family, owner-occupied primary residence with homestead exemption",
       "build_year": "Built before 2008 (program rule references permit/build predating Jan 1, 2008)",
       "insured_value_cap_usd": 700000,
-      "insured_value_note": "Insurance Coverage A at or below $700,000; cap waived for low-income applicants per program materials (NEEDS_VERIFICATION on the waiver detail)",
+      "insured_value_note": "Insurance Coverage A at or below $700,000 for ALL applicants this cycle, including low-income. The statutory low-income exemption from the cap (s. 215.5586(2)(a)2.) is suspended by s. 215.5586(2)(a)7.c., which expires 2026-07-01; mysafeflhome.com program materials list the cap with no waiver. Re-verify after 2026-07-01, when subparagraph 7 (including the low/moderate income restriction) sunsets unless amended.",
       "insurance_required": "Must carry a valid homeowners insurance policy",
       "inspection_first": "A program wind mitigation inspection must be completed before a grant is issued; only improvements recommended in the inspection report are eligible",
+      "inspection_recency": "The hurricane mitigation inspection must have occurred within the previous 24 months from the date of application (s. 215.5586(2)(a)7.b., Florida Statutes; subparagraph 7 expires 2026-07-01)",
       "income_limit_this_cycle": "2025-26 cycle limited to low- and moderate-income homeowners. Higher-income homeowners are not eligible this cycle (a change from earlier years).",
       "income_tiers": {
         "low": "Household income at or below 80% of county median income",
@@ -98,7 +115,7 @@
       "note": "Voluntary reporting; savings are not guaranteed and typically require comprehensive hardening rather than a single feature. Always present with this caveat."
     },
     "changelog": [
-      {"date": "2026-06-11", "entry": "FY2026-27 budget reappropriating $405M+ across MSFH and the Condo Pilot awaits the Governor's signature (expected June 2026)."},
+      {"date": "2026-06-11", "entry": "FY2026-27 budget (HB 5001E, passed 2026-05-29) reappropriating roughly $378M for MSFH and $27M for the Condo Pilot awaits the Governor's signature, due before July 1. A companion tax package (HB 7031E), also awaiting signature, would provide a three-year sales tax refund on impact-resistant windows, doors, and garage doors purchased from July 1, 2026."},
       {"date": "2025-08-04", "entry": "Application portal reopened for the 2025-26 cycle, limited to low- and moderate-income homeowners, with age/income priority groups."},
       {"date": "2025-07-05", "entry": "New priority-group ordering took effect (low-income 60+ first)."}
     ]

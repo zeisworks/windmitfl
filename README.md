@@ -9,7 +9,7 @@ spec (architecture, design tokens, data rules, monetization) lives in
 ```
 make build    # production build to output/ (skips counties with unverified required fields)
 make draft    # also renders unverified counties, noindexed, unverified figures omitted
-make verify   # prints every NEEDS_VERIFICATION field with its source: the research worklist
+make verify   # research worklist: NEEDS_VERIFICATION fields plus past-due and upcoming dated reviews (_reviews in data files)
 make serve    # serve output/ at http://localhost:8000
 ```
 
@@ -31,3 +31,16 @@ Requires Python 3.11+ and Jinja2 (`pip install jinja2`).
    `statewide.json.msfh.changelog`).
 3. `make build`: counties publish automatically once their required fields
    (`ami_80`, `ami_120`) hold real values.
+4. Verified facts that expire carry a dated entry in a data file's `_reviews`
+   array; `make verify` fails on past-due reviews and lists ones coming due
+   within 30 days. The big cluster is 2026-07-01 (budget signature, tax
+   package, the s. 215.5586 subparagraph 7 sunset).
+
+## Blocked on Jack
+
+- Profitise publisher embed snippet: replaces `<!-- PROFITISE_EMBED -->` in
+  `templates/partials/cta_insurance.html`.
+- Contractor quote form routing: `templates/partials/contractor_form.html`
+  posts to a placeholder endpoint.
+- Legal review of `/privacy/`, `/terms/`, and the TCPA-style consent copy in
+  the contractor form (all currently noindexed / draft-flagged).

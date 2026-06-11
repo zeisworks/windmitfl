@@ -6,6 +6,12 @@
   <title>{% block title %}{{ site_name }}{% endblock %}</title>
   <meta name="description" content="{% block description %}Independent navigator for Florida wind mitigation inspections, insurance discounts, and My Safe Florida Home grants.{% endblock %}">
   <link rel="canonical" href="{{ page.canonical }}">
+  <meta property="og:site_name" content="{{ site_name }}">
+  <meta property="og:type" content="{% block ogtype %}website{% endblock %}">
+  <meta property="og:url" content="{{ page.canonical }}">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta name="twitter:card" content="summary">
   {% if page.noindex %}
   <meta name="robots" content="noindex">
   {% endif %}

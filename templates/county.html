@@ -44,7 +44,7 @@
       <p class="data-label">MSFH INCOME LIMITS</p>
       {% if county.ami_80 | fact and county.ami_120 | fact %}
       <p class="data-figure">{{ county.ami_80 | usd }} / {{ county.ami_120 | usd }}</p>
-      <p class="data-note">Low (80% AMI) / moderate (120% AMI) household income ceilings</p>
+      <p class="data-note">Low (80% AMI) / moderate (120% AMI) ceilings, 4-person household; limits vary by household size</p>
       {% else %}
       <p class="data-figure data-pending">Pending</p>
       <p class="data-note">Awaiting HUD income limit verification</p>
@@ -109,7 +109,7 @@
     <p>{{ msfh.eligibility.application_window_rule }}</p>
     <h3>What the grant is</h3>
     <p>Two parts: a free program-assigned wind mitigation inspection, then a matching grant for improvements that inspection recommends. The state pays $2 for every $1 the homeowner spends, up to {{ msfh.grant_terms.max_grant_usd | usd }}. {{ msfh.grant_terms.low_income_exception }}. Reimbursement comes after completed, inspected work; it is not a loan.</p>
-    <p>Basic eligibility: {{ msfh.eligibility.property | lower }}, built before 2008, with insurance Coverage A at or below {{ msfh.eligibility.insured_value_cap_usd | usd }}, and a valid homeowners insurance policy. A program inspection must be completed before any grant is issued.</p>
+    <p>Basic eligibility: {{ msfh.eligibility.property | lower }}, built before 2008, with insurance Coverage A at or below {{ msfh.eligibility.insured_value_cap_usd | usd }}, and a valid homeowners insurance policy. A program inspection must be completed before any grant is issued, and the inspection backing a grant application must be no more than 24 months old.</p>
     <p class="cite">Apply and confirm details at <a href="{{ msfh.portal }}" rel="noopener">mysafeflhome.com</a>, administered by the {{ msfh.administrator }}.</p>
     <p><a class="btn-cone" href="/tools/msfh-eligibility/">Check your eligibility</a></p>
   </section>
