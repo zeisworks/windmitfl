@@ -15,6 +15,16 @@ make serve    # serve output/ at http://localhost:8000
 
 Requires Python 3.11+ and Jinja2 (`pip install jinja2`).
 
+## Deploying (Cloudflare Workers)
+
+`wrangler.jsonc` serves the generated `output/` directory as static assets
+(404s fall through to the built 404 page). Because `output/` is gitignored,
+the Workers Builds project must generate it before deploying:
+
+- Build command: `pip install jinja2 && make build`
+- Deploy command: `npx wrangler deploy`
+- Branch: `main`
+
 ## Layout
 
 - `build.py` generator; `verify.py` verification worklist

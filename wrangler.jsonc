@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers static assets deployment.
+  // The site must be generated before deploy: the Workers Builds "Build command"
+  // should be set to `pip install jinja2 && make build` (output/ is gitignored).
+  "name": "windmitfl",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./output",
+    "not_found_handling": "404-page"
+  }
+}
